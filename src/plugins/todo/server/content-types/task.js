@@ -17,7 +17,7 @@ module.exports = {
     "content-type-builder": {
       visible: false,
     },
-  },
+  },  
   attributes: {
     name: {
       type: "string",

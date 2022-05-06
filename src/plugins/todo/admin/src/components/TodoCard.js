@@ -136,7 +136,7 @@ const TodoCard = () => {
                 width={3}
                 height={3}
               />
-              Add todo
+              Add Criteria
             </Flex>
           </Typography>
 

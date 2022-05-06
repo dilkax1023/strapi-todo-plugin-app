@@ -8,12 +8,19 @@ import {
   Button,
   TextInput,
 } from "@strapi/design-system";
+import { Select, Option } from '@strapi/design-system/Select';
+import { Switch } from '@strapi/design-system/Switch';
 import { useCMEditViewDataManager } from "@strapi/helper-plugin";
 import axiosInstance from "../utils/axiosInstance";
 
 const CreateTaskModal = ({ handleClose, refetchTasks }) => {
   const [name, setName] = useState("");
   const [status, setStatus] = useState();
+  const [values, setValues] = useState([]);
+  const [segs, setSegs] = useState([]);
+  const [movs, setMovs] = useState([]);
+  const [error, toggleError] = useState();
+  const [disabled, toggleDisabled] = useState();
 
   const { slug, initialData } = useCMEditViewDataManager();
 
@@ -84,6 +91,31 @@ const CreateTaskModal = ({ handleClose, refetchTasks }) => {
           onChange={(e) => setName(e.target.value)}
           value={name}
         />
+        <Select style={{margin: "2rem 0"}} id="select1" label="Typologie d'utilisateur" placeholder="Typologie d'utilisateur" onClear={() => setValues([])} hint="Description line" clearLabel="Clear" value={values} onChange={setValues} customizeContent={values => `${values.length} currently selected`} multi withTags>
+            <Option value={'Pharmaciens titulaires'}>Pharmaciens titulaires</Option>
+            <Option value={"Membres d'équipe officinal"}>Membres d'équipe officinal</Option>
+            <Option value={'bagel'}>Comptes Démo</Option>
+          </Select>
+
+        <Select style={{margin: "2rem 0"}} id="select2" label="Segmentation" placeholder="Segmentation" onClear={() => setSegs([])} hint="Description line" clearLabel="Clear" value={segs} onChange={setSegs}  customizeContent={values => `${values.length} currently selected`} multi withTags>
+          <Option value={'Ivoire'}>Ivoire</Option>
+          <Option value={'Platine'}>Platine</Option>
+          <Option value={'Or'}>Or</Option>
+          <Option value={'Bleu'}>Bleu</Option>
+        </Select>
+
+          {segs.length > 0 && <Select style={{margin: "2rem 0"}} id="select3" label="Mouvement" placeholder="Mouvement" onClear={() => setMovs([])} hint="Description line" clearLabel="Clear" value={movs} onChange={setMovs}  customizeContent={values => `${values.length} currently selected`} multi withTags>
+            <Option value={'Ajouter Gain'}>Ivoire</Option>
+            <Option value={'Retirer Perte'}>Platine</Option>
+          </Select>}
+
+          {/* <Switch label="Activate the microphone" selected={false} onChange={() => setChecked(s => !s)} visibleLabels /> */}
+
+          {/* <div style={{margin: "20px"}}>
+            <button  onClick={() => toggleError(s => s ? undefined : 'An error occured')}>Show the error state</button>
+            <button onClick={() => toggleDisabled(s => !s)}>Show the disabled state</button>
+          </div> */}
+          
       </ModalBody>
       <ModalFooter
         startActions={
